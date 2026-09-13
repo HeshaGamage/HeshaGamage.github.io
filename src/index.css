@@ -18,6 +18,9 @@
   --accent: #ffffff;
   --accent-hover: #e0e0e0;
   --on-accent: #0a0a0a;
+  --live: #4ade80;
+  --live-bg: rgba(74, 222, 128, 0.10);
+  --live-bd: rgba(74, 222, 128, 0.30);
 }
 
 html.light {
@@ -38,6 +41,9 @@ html.light {
   --accent: #0a0a0a;
   --accent-hover: #333333;
   --on-accent: #ffffff;
+  --live: #15803d;
+  --live-bg: rgba(21, 128, 61, 0.08);
+  --live-bd: rgba(21, 128, 61, 0.28);
 }
 
 @layer base {

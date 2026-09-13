@@ -1,6 +1,5 @@
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
-import ChatBot from './components/ChatBot';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import Projects from './components/Projects';
@@ -22,7 +21,6 @@ function App() {
           <Contact />
         </main>
         <Footer />
-        <ChatBot />
       </div>
     </ThemeProvider>
   );

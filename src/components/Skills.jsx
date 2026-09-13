@@ -1,7 +1,7 @@
 import {
   SiPython, SiJavascript, SiTypescript, SiReact, SiNodedotjs,
   SiHtml5, SiCss, SiFlutter, SiPhp, SiSpringboot, SiWordpress,
-  SiNextdotjs, SiTailwindcss, SiDjango, SiFlask, SiFastapi,
+  SiNextdotjs, SiTailwindcss, SiDjango, SiFastapi,
   SiGithub, SiDocker, SiTensorflow, SiPytorch, SiPandas, SiScikitlearn,
   SiMysql, SiFirebase, SiGit, SiMongodb, SiRedis, SiKubernetes,
   SiPostgresql, SiApachekafka, SiJupyter, SiNumpy,
@@ -15,7 +15,7 @@ const languages = [
   { name: 'HTML5',       Icon: SiHtml5,       color: '#E34F26' },
   { name: 'CSS3',        Icon: SiCss,         color: '#1572B6' },
   { name: 'React',       Icon: SiReact,       color: '#61DAFB' },
-  { name: 'Next.js',     Icon: SiNextdotjs,   color: '#f0f0f0' },
+  { name: 'Next.js',     Icon: SiNextdotjs,   color: 'var(--text1)' },
   { name: 'Node.js',     Icon: SiNodedotjs,   color: '#68A063' },
   { name: 'Tailwind',    Icon: SiTailwindcss, color: '#06B6D4' },
   { name: 'Flutter',     Icon: SiFlutter,     color: '#54C5F8' },
@@ -26,7 +26,7 @@ const languages = [
 ];
 
 const tools = [
-  { name: 'GitHub',       Icon: SiGithub,       color: '#f0f0f0' },
+  { name: 'GitHub',       Icon: SiGithub,       color: 'var(--text1)' },
   { name: 'Docker',       Icon: SiDocker,       color: '#2496ED' },
   { name: 'TensorFlow',   Icon: SiTensorflow,   color: '#FF6F00' },
   { name: 'PyTorch',      Icon: SiPytorch,      color: '#EE4C2C' },
@@ -40,7 +40,7 @@ const tools = [
   { name: 'Redis',        Icon: SiRedis,        color: '#DC382D' },
   { name: 'PostgreSQL',   Icon: SiPostgresql,   color: '#336791' },
   { name: 'Kubernetes',   Icon: SiKubernetes,   color: '#326CE5' },
-  { name: 'Kafka',        Icon: SiApachekafka,  color: '#f0f0f0' },
+  { name: 'Kafka',        Icon: SiApachekafka,  color: 'var(--text1)' },
   { name: 'Jupyter',      Icon: SiJupyter,      color: '#F37626' },
 ];
 

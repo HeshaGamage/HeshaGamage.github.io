@@ -1,77 +1,74 @@
 import { FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from 'react-icons/fa';
-import { useState, useRef } from 'react';
 
-const socialLinks = [
-  { icon: <FaGithub size={16} />, label: 'GitHub', href: 'https://github.com/HeshaGamage', value: 'github.com/HeshaGamage' },
-  { icon: <FaLinkedin size={16} />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/heshan-kavishka-655381215/', value: 'linkedin.com/in/heshan-kavishka' },
-  { icon: <FaEnvelope size={16} />, label: 'Email', href: 'mailto:heshank92@gmail.com', value: 'heshank92@gmail.com' },
-  { icon: <FaFileDownload size={16} />, label: 'CV — General', href: '/resume.pdf', value: 'Download PDF', download: true },
-  { icon: <FaFileDownload size={16} />, label: 'CV — Data Engineering', href: '/resume-de.pdf', value: 'Download PDF', download: true },
-  { icon: <FaFileDownload size={16} />, label: 'CV — Full Stack', href: '/resume-fs.pdf', value: 'Download PDF', download: true },
+const channels = [
+  {
+    icon: <FaEnvelope size={16} />,
+    label: 'Email',
+    href: 'mailto:heshank92@gmail.com',
+    value: 'heshank92@gmail.com',
+  },
+  {
+    icon: <FaLinkedin size={16} />,
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/heshan-kavishka-655381215/',
+    value: 'heshan-kavishka',
+  },
+  {
+    icon: <FaGithub size={16} />,
+    label: 'GitHub',
+    href: 'https://github.com/HeshaGamage',
+    value: 'HeshaGamage',
+  },
+];
+
+const resumes = [
+  { label: 'General', href: `${import.meta.env.BASE_URL}resume.pdf` },
+  { label: 'Data Engineering', href: `${import.meta.env.BASE_URL}resume-de.pdf` },
+  { label: 'Full Stack', href: `${import.meta.env.BASE_URL}resume-fs.pdf` },
 ];
 
 export default function Contact() {
-  const [status, setStatus] = useState('');
-  const [sending, setSending] = useState(false);
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const messageRef = useRef();
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const name = nameRef.current.value.trim();
-    const email = emailRef.current.value.trim();
-    const message = messageRef.current.value.trim();
-
-    setSending(true);
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
-      });
-      if (res.ok) {
-        setStatus('sent');
-      } else {
-        setStatus('error');
-      }
-    } catch {
-      setStatus('error');
-    } finally {
-      setSending(false);
-    }
-  }
-
   return (
     <section id="contact" className="py-32 border-t border-[var(--border)]">
       <div className="max-w-7xl mx-auto px-8">
         {/* Big CTA heading */}
         <div className="mb-20">
           <h2 className="text-display text-[var(--text1)] mb-6">
-            Let's work<br />
+            Let&apos;s work<br />
             <span className="text-[var(--text6)]">together</span>
           </h2>
-          <p className="text-[var(--text4)] text-lg max-w-md leading-relaxed">
+          <p className="text-[var(--text4)] text-lg max-w-md leading-relaxed mb-10">
             Open to new roles, collaborations, and conversations about data and tech.
           </p>
+          <a
+            href="mailto:heshank92@gmail.com"
+            className="inline-block text-sm px-7 py-4 bg-[var(--accent)] text-[var(--on-accent)] font-semibold rounded-full hover:bg-[var(--accent-hover)] transition-colors duration-300 tracking-wide"
+          >
+            Send me an email
+          </a>
         </div>
 
         <div className="grid md:grid-cols-2 gap-16 border-t border-[var(--border)] pt-16">
-          {/* Left: links */}
+          {/* Left: channels */}
           <div className="flex flex-col gap-4">
-            <span className="text-xs text-[var(--text6)] tracking-[0.2em] uppercase mb-4">Find me at</span>
-            {socialLinks.map((link) => (
+            <span className="text-xs text-[var(--text6)] tracking-[0.2em] uppercase mb-4">
+              Find me at
+            </span>
+            {channels.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                target={link.download ? undefined : '_blank'}
+                target={link.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel="noopener noreferrer"
-                download={link.download}
                 className="group flex items-center justify-between py-4 border-b border-[var(--border)] hover:border-[var(--text6)] transition-colors duration-300"
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-[var(--text6)] group-hover:text-[var(--text1)] transition-colors">{link.icon}</span>
-                  <span className="text-sm text-[var(--text3)] tracking-wide uppercase">{link.label}</span>
+                  <span className="text-[var(--text6)] group-hover:text-[var(--text1)] transition-colors">
+                    {link.icon}
+                  </span>
+                  <span className="text-sm text-[var(--text3)] tracking-wide uppercase">
+                    {link.label}
+                  </span>
                 </div>
                 <span className="text-sm text-[var(--text5)] group-hover:text-[var(--text1)] transition-colors">
                   {link.value}
@@ -80,57 +77,32 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Right: form */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <span className="text-xs text-[var(--text6)] tracking-[0.2em] uppercase mb-4">Send a message</span>
-            <div className="flex flex-col gap-2">
-              <label className="text-xs text-[var(--text5)] tracking-wide uppercase">Name</label>
-              <input
-                ref={nameRef}
-                type="text"
-                placeholder="Your name"
-                required
-                className="bg-transparent border-b border-[var(--border)] focus:border-[var(--text5)] pb-3 text-[var(--text1)] placeholder-[var(--ghost)] outline-none transition-colors text-sm"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-xs text-[var(--text5)] tracking-wide uppercase">Email</label>
-              <input
-                ref={emailRef}
-                type="email"
-                placeholder="your@email.com"
-                required
-                className="bg-transparent border-b border-[var(--border)] focus:border-[var(--text5)] pb-3 text-[var(--text1)] placeholder-[var(--ghost)] outline-none transition-colors text-sm"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label className="text-xs text-[var(--text5)] tracking-wide uppercase">Message</label>
-              <textarea
-                ref={messageRef}
-                placeholder="Tell me about your project..."
-                rows={4}
-                required
-                className="bg-transparent border-b border-[var(--border)] focus:border-[var(--text5)] pb-3 text-[var(--text1)] placeholder-[var(--ghost)] outline-none transition-colors resize-none text-sm"
-              />
-            </div>
-            {status === 'sent' ? (
-              <div className="py-4 text-center text-green-400 text-sm tracking-wide border border-green-900 rounded-full mt-2">
-                Message sent — I'll be in touch soon.
-              </div>
-            ) : status === 'error' ? (
-              <div className="py-4 text-center text-red-400 text-sm tracking-wide border border-red-900 rounded-full mt-2">
-                Something went wrong. Email me directly at heshank92@gmail.com
-              </div>
-            ) : (
-              <button
-                type="submit"
-                disabled={sending}
-                className="mt-2 py-4 bg-[var(--accent)] text-[var(--on-accent)] rounded-full font-semibold text-sm hover:bg-[var(--accent-hover)] transition-colors duration-300 tracking-wide disabled:opacity-50"
+          {/* Right: resumes */}
+          <div className="flex flex-col gap-4">
+            <span className="text-xs text-[var(--text6)] tracking-[0.2em] uppercase mb-4">
+              Download a CV
+            </span>
+            {resumes.map((cv) => (
+              <a
+                key={cv.label}
+                href={cv.href}
+                download
+                className="group flex items-center justify-between py-4 border-b border-[var(--border)] hover:border-[var(--text6)] transition-colors duration-300"
               >
-                {sending ? 'Sending...' : 'Send Message'}
-              </button>
-            )}
-          </form>
+                <div className="flex items-center gap-4">
+                  <span className="text-[var(--text6)] group-hover:text-[var(--text1)] transition-colors">
+                    <FaFileDownload size={16} />
+                  </span>
+                  <span className="text-sm text-[var(--text3)] tracking-wide uppercase">
+                    {cv.label}
+                  </span>
+                </div>
+                <span className="text-sm text-[var(--text5)] group-hover:text-[var(--text1)] transition-colors">
+                  PDF
+                </span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
