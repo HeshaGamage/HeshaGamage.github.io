@@ -6,8 +6,8 @@ Live at **https://heshagamage.github.io/**
 
 ## Stack
 
-React 19 + Vite + Tailwind CSS 4. No backend: the site is fully static so it can
-be served directly by GitHub Pages.
+React 19 + Vite + Tailwind CSS 4, typeset in Inter and Source Serif 4.
+No backend: the site is fully static so GitHub Pages can serve it directly.
 
 ## Running locally
 
@@ -28,10 +28,11 @@ Do not commit `dist/` — the workflow builds it.
 
 ## Editing content
 
-| What | Where |
-|---|---|
-| Featured projects | `src/components/Projects.jsx` |
-| Intro, role, social links | `src/components/Hero.jsx` |
-| Tech stack reels | `src/components/Skills.jsx` |
-| Contact channels and CVs | `src/components/Contact.jsx` |
-| CV PDFs | `public/resume*.pdf` |
+All page content — profile, summary, projects, skills, education, certifications —
+lives in **`src/data/resume.js`**. Edit that one file to update the site; the
+components under `src/components/` are presentational and read from it.
+
+CV PDFs live in `public/resume*.pdf`.
+
+The page is a resume-style document and carries a print stylesheet, so the browser's
+print dialog (or the printer button in the header) saves a clean PDF of it.

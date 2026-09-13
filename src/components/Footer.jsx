@@ -1,14 +1,14 @@
+import { profile } from '../data/resume';
+
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] py-8 px-8">
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <span className="text-xs text-[var(--text6)] tracking-widest uppercase">
-          © {new Date().getFullYear()} Heshan Gamage
-        </span>
-        <span className="text-xs text-[var(--ghost)] tracking-widest uppercase">
-          Built with React + Tailwind
-        </span>
-      </div>
+    <footer className="mt-12 pt-6 border-t border-[var(--rule)] flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span className="text-[12px] text-[var(--faint)]">
+        © {new Date().getFullYear()} {profile.name}
+      </span>
+      <span className="print-hidden text-[12px] text-[var(--faint)]">
+        Built with React &amp; Tailwind · Deployed on GitHub Pages
+      </span>
     </footer>
   );
 }

@@ -1,49 +1,36 @@
 @import "tailwindcss";
 
+/* Document-style resume portfolio: a paper sheet on a tinted desk. */
 :root {
-  --bg: #0a0a0a;
-  --surface: #111111;
-  --border: #1e1e1e;
-  --border2: #2a2a2a;
-  --text1: #f0f0f0;
-  --text2: #cccccc;
-  --text3: #888888;
-  --text4: #666666;
-  --text5: #555555;
-  --text6: #444444;
-  --ghost: #333333;
-  --tag-bg: #151515;
-  --tag-bd: #222222;
-  --hover: #111111;
-  --accent: #ffffff;
-  --accent-hover: #e0e0e0;
-  --on-accent: #0a0a0a;
-  --live: #4ade80;
-  --live-bg: rgba(74, 222, 128, 0.10);
-  --live-bd: rgba(74, 222, 128, 0.30);
+  --desk: #f4f6f8;
+  --paper: #ffffff;
+  --ink: #191c1e;
+  --ink2: #3a4149;
+  --muted: #5b6470;
+  --faint: #8a939e;
+  --rule: #e5e7eb;
+  --rule2: #eef0f3;
+  --accent: #175cd3;
+  --accent-soft: rgba(23, 92, 211, 0.08);
+  --chip: #f3f5f7;
+  --chip-bd: #e3e7ec;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 12px 32px rgba(16, 24, 40, 0.06);
 }
 
-html.light {
-  --bg: #fafafa;
-  --surface: #ffffff;
-  --border: #e5e5e5;
-  --border2: #d0d0d0;
-  --text1: #0a0a0a;
-  --text2: #333333;
-  --text3: #555555;
-  --text4: #555555;
-  --text5: #888888;
-  --text6: #999999;
-  --ghost: #bbbbbb;
-  --tag-bg: #f0f0f0;
-  --tag-bd: #e0e0e0;
-  --hover: #f4f4f4;
-  --accent: #0a0a0a;
-  --accent-hover: #333333;
-  --on-accent: #ffffff;
-  --live: #15803d;
-  --live-bg: rgba(21, 128, 61, 0.08);
-  --live-bd: rgba(21, 128, 61, 0.28);
+html.dark {
+  --desk: #0e1114;
+  --paper: #15191d;
+  --ink: #e9ecef;
+  --ink2: #c6ccd3;
+  --muted: #97a1ac;
+  --faint: #78828e;
+  --rule: #262c33;
+  --rule2: #1e242a;
+  --accent: #7fa9f5;
+  --accent-soft: rgba(127, 169, 245, 0.12);
+  --chip: #1b2127;
+  --chip-bd: #2a313a;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 @layer base {
@@ -55,66 +42,104 @@ html.light {
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--bg);
+    scroll-padding-top: 88px;
+    background-color: var(--desk);
   }
 
   body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background-color: var(--bg);
-    color: var(--text1);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    background-color: var(--desk);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--on-accent);
+    background: var(--accent-soft);
+    color: var(--ink);
   }
 }
 
 @layer utilities {
-  .text-display {
-    font-size: clamp(3.5rem, 9vw, 8rem);
-    font-weight: 500;
-    letter-spacing: -0.03em;
-    line-height: 0.95;
-  }
-
-  .text-section {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 500;
+  /* Display name at the top of the sheet. */
+  .font-serif-display {
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-weight: 700;
     letter-spacing: -0.025em;
-    line-height: 1;
+    line-height: 1.05;
   }
 
-  .divider {
-    border-color: var(--border);
+  /* Uppercase section heading with its hairline rule. */
+  .section-heading {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink);
   }
 
-  .fade-up {
-    animation: fadeUp 0.7s ease forwards;
+  .print-hidden {
+    /* nothing in screen view */
+  }
+}
+
+/* Printing the page should produce a clean CV, not a screenshot of a website. */
+@media print {
+  :root {
+    --desk: #ffffff;
+    --paper: #ffffff;
+    --shadow: none;
   }
 
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(24px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  html.dark {
+    --desk: #ffffff;
+    --paper: #ffffff;
+    --ink: #000000;
+    --ink2: #1a1a1a;
+    --muted: #333333;
+    --faint: #555555;
+    --rule: #cccccc;
+    --rule2: #e0e0e0;
+    --accent: #14418f;
+    --chip: #ffffff;
+    --chip-bd: #cccccc;
   }
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+  body {
+    font-size: 10.5pt;
+    line-height: 1.45;
   }
 
-  @keyframes marquee-reverse {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
+  .print-hidden {
+    display: none !important;
+  }
+
+  .sheet {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  section {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
